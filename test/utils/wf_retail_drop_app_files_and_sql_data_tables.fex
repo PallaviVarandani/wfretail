@@ -1,0 +1,42 @@
+-*DM_JOB_TYPE=0                                                                 
+-*DM_REQ_DESC=Tutorial Drop                                                     
+                                                                                
+APP CREATE app04/bv_inheritance_examples IFNEXIST                               
+APP CREATE app04/bv_namespace_on IFNEXIST                                       
+APP DELETE app04/dimensions app04/facts app04/bv_inheritance_examples app04/bv_namespace_on ALL
+APP CREATE app04/profiles IFNEXIST                                              
+APP CREATE app04/python IFNEXIST                                                
+APP CREATE app04/rserver IFNEXIST                                               
+EX EDADEL FOCEXEC,app04/profiles/wf_retail_profile,IFEXIST                      
+EX EDADEL FOCEXEC,app04/profiles/wf_retail_profile,IFEXIST                      
+EX EDADEL MASTER ,app04/profiles/entitlement_product,IFEXIST                    
+EX EDADEL ACCESS ,app04/profiles/entitlement_product,IFEXIST                    
+EX EDADEL MASTER ,app04/profiles/wf_retail_product,IFEXIST                      
+EX EDADEL ACCESS ,app04/profiles/wf_retail_product,IFEXIST                      
+EX EDADEL SQL    ,app04/profiles/wf_retail_product,IFEXIST                      
+EX EDADEL MASTER ,app04/profiles/wf_retail_datasec_product,IFEXIST              
+EX EDADEL ACCESS ,app04/profiles/wf_retail_datasec_product,IFEXIST              
+EX EDADEL SQL    ,app04/profiles/wf_retail_datasec_product,IFEXIST              
+EX EDADEL JSON   ,app04/uploads/population_demo_json,IFEXIST                    
+EX EDADEL CSV    ,app04/uploads/sales_orders_csv,IFEXIST                        
+EX EDADEL CSV    ,app04/uploads/sales_orders_mispelled_cities,IFEXIST           
+EX EDADEL XLSX   ,app04/uploads/join_demo,IFEXIST                               
+EX EDADEL XLSX   ,app04/uploads/nls_country_demo,IFEXIST                        
+EX EDADEL XLSX   ,app04/uploads/pivot_demo,IFEXIST                              
+EX EDADEL XLSX   ,app04/uploads/populationchange,IFEXIST                        
+EX EDADEL XLSX   ,app04/uploads/sales_orders,IFEXIST                            
+EX EDADEL XLSX   ,app04/uploads/target_accounts,IFEXIST                         
+EX EDADEL XLSX   ,app04/uploads/retail_cross,IFEXIST                            
+SET EMGSRV = OFF                                                                
+APP DELETE app04/uploads                                                        
+APP DELETE app04/profiles ALL                                                   
+APP DELETE app04/test ALL                                                       
+APP DELETE app04/dm ALL                                                         
+APP DELETE app04/python ALL                                                     
+APP DELETE app04/rserver ALL                                                    
+APP DELETEFILE app04 wf_retail* MASTER                                          
+SET EMGSRV = ON                                                                 
+-RUN                                                                            
+-TYPE1                                                                          
+-SET &STRING = '''app04'' WebFOCUS Retail' ;                                    
+-SET &MSG = EMGPUT(18663,1,&STRING.LENGTH,&STRING,0,'',0,'',256,A256);          
